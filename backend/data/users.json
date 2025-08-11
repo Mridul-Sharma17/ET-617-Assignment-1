@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "password123",
+    "createdAt": "2025-08-11T17:59:51.081Z",
+    "lastLogin": "2025-08-11T17:59:59.197Z"
+  },
+  {
+    "id": 2,
+    "username": "test",
+    "email": "test@test.com",
+    "password": "Hbd@681727",
+    "createdAt": "2025-08-11T18:12:35.358Z",
+    "lastLogin": "2025-08-11T18:20:10.311Z"
+  }
+]
