@@ -50,8 +50,31 @@ const writeDB = (dbName, data) => {
 };
 
 // CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000', 
+  'http://localhost:5173',
+  'http://localhost:5174', // Additional Vite ports
+  'https://your-app-name.vercel.app', // Replace with your actual Vercel domain
+  'https://*.vercel.app' // Allow all Vercel preview deployments
+];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in allowed list or matches Vercel pattern
+    if (allowedOrigins.includes(origin) || origin.includes('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // For development, be more permissive
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 

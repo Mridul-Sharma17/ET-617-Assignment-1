@@ -4159,5 +4159,215 @@
       },
       "clickTime": "2025-08-12T20:18:43.468Z"
     }
+  },
+  {
+    "id": 1755030205846,
+    "sessionId": "session_1755029861135_a0jiolkgh",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029861135_a0jiolkgh",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:23:25.837Z"
+    },
+    "timestamp": "2025-08-12T20:23:25.837Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755029861135_a0jiolkgh",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:23:25.837Z"
+    }
+  },
+  {
+    "id": 1755030205850,
+    "sessionId": "session_1755029861135_a0jiolkgh",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029861135_a0jiolkgh",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:23:25.838Z"
+    },
+    "timestamp": "2025-08-12T20:23:25.838Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755029861135_a0jiolkgh",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:23:25.838Z"
+    }
+  },
+  {
+    "id": 1755030241306,
+    "sessionId": "session_1755030241088_4s83d3be9",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:01.298Z"
+    },
+    "timestamp": "2025-08-12T20:24:01.298Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:01.298Z"
+    }
+  },
+  {
+    "id": 1755030241308,
+    "sessionId": "session_1755030241088_4s83d3be9",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:01.299Z"
+    },
+    "timestamp": "2025-08-12T20:24:01.299Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:01.299Z"
+    }
+  },
+  {
+    "id": 1755030256982,
+    "sessionId": "session_1755030241088_4s83d3be9",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:16.975Z"
+    },
+    "timestamp": "2025-08-12T20:24:16.975Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:16.975Z"
+    }
+  },
+  {
+    "id": 1755030256987,
+    "sessionId": "session_1755030241088_4s83d3be9",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:16.976Z"
+    },
+    "timestamp": "2025-08-12T20:24:16.976Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755030241088_4s83d3be9",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:24:16.976Z"
+    }
   }
 ]

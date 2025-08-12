@@ -25,7 +25,7 @@ const clickstreamLogger = {
 
 class ClickstreamService {
   constructor() {
-    this.baseURL = 'http://localhost:5000/api';
+    this.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
     this.sessionId = this.generateSessionId();
     this.userId = null;
     this.isInitialized = false;
