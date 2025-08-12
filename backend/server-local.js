@@ -241,14 +241,19 @@ app.post('/api/clickstream', (req, res) => {
   try {
     const clickData = {
       id: Date.now(),
-      userId: req.body.userId,
       sessionId: req.body.sessionId,
-      action: req.body.action,
+      userId: req.body.userId,
+      eventType: req.body.eventType,
+      eventData: req.body.eventData,
+      timestamp: req.body.timestamp || new Date().toISOString(),
+      url: req.body.url,
+      userAgent: req.body.userAgent || req.headers['user-agent'],
+      viewport: req.body.viewport,
+      ip: req.ip,
+      // Keep backward compatibility with old format
+      action: req.body.action || req.body.eventType,
       elementId: req.body.elementId,
       page: req.body.page,
-      timestamp: new Date().toISOString(),
-      userAgent: req.headers['user-agent'],
-      ip: req.ip,
       additionalData: req.body.additionalData
     };
     
@@ -256,7 +261,7 @@ app.post('/api/clickstream', (req, res) => {
     clickstream.push(clickData);
     writeDB('clickstream', clickstream);
     
-    console.log('📊 Clickstream recorded:', clickData.action);
+    console.log(`📊 Clickstream recorded: ${clickData.eventType || clickData.action} (Session: ${clickData.sessionId?.substring(0, 8)}...)`);
     
     res.json({
       success: true,

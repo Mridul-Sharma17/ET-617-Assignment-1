@@ -4,11 +4,13 @@
  * Includes comprehensive logging and state management
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import Authentication from '@/components/Authentication';
 import CoursesPage from '@/components/pages/CoursesPage';
 import CourseViewer from '@/components/pages/CourseViewer';
+import AnalyticsDashboard from '@/components/pages/AnalyticsDashboard';
+import clickstreamService from '@/services/clickstreamService';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -44,27 +46,54 @@ function Dashboard() {
 
   appLogger.info('Dashboard component rendered', { user: user?.username, currentPage });
 
+  // Initialize clickstream tracking when Dashboard mounts
+  useEffect(() => {
+    if (user) {
+      clickstreamService.initialize(user);
+      appLogger.info('Clickstream tracking initialized for user', { user: user?.username });
+    }
+  }, [user]);
+
   const handleLogout = () => {
     appLogger.user('User initiated logout');
+    clickstreamService.trackEvent('logout', { user: user?.username });
     logout();
   };
 
   // Navigation handlers
   const handleBrowseCourses = () => {
     appLogger.info('Navigating to courses page');
+    clickstreamService.trackNavigation('dashboard', 'courses');
+    clickstreamService.trackButtonClick('browse_courses', { from: 'dashboard' });
     setCurrentPage('courses');
   };
 
   const handleBackToDashboard = () => {
     appLogger.info('Navigating back to dashboard');
+    clickstreamService.trackNavigation(currentPage, 'dashboard');
+    clickstreamService.trackButtonClick('back_to_dashboard', { from: currentPage });
     setCurrentPage('dashboard');
     setSelectedCourse(null);
   };
 
   const handleSelectCourse = (course) => {
     appLogger.info('Course selected', { courseId: course.id });
+    clickstreamService.trackNavigation('courses', 'course-view');
+    clickstreamService.trackCourseView(course.id, course.title, course.type);
+    clickstreamService.trackButtonClick('select_course', { 
+      courseId: course.id, 
+      courseTitle: course.title,
+      courseType: course.type 
+    });
     setSelectedCourse(course);
     setCurrentPage('course-view');
+  };
+
+  const handleViewAnalytics = () => {
+    appLogger.info('Navigating to analytics dashboard');
+    clickstreamService.trackNavigation('dashboard', 'analytics');
+    clickstreamService.trackButtonClick('view_analytics', { from: 'dashboard' });
+    setCurrentPage('analytics');
   };
 
   // Render different pages based on currentPage state
@@ -81,6 +110,14 @@ function Dashboard() {
     return (
       <CourseViewer 
         course={selectedCourse}
+        onBack={handleBackToDashboard}
+      />
+    );
+  }
+
+  if (currentPage === 'analytics') {
+    return (
+      <AnalyticsDashboard 
         onBack={handleBackToDashboard}
       />
     );
@@ -274,10 +311,13 @@ function Dashboard() {
                         <div className="text-sm font-semibold">Watch Videos</div>
                       </div>
                     </Button>
-                    <Button className="h-24 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <Button 
+                      onClick={handleViewAnalytics}
+                      className="h-24 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
                       <div className="text-center space-y-2">
                         <div className="text-3xl group-hover:scale-110 transition-transform duration-300">📊</div>
-                        <div className="text-sm font-semibold">View Progress</div>
+                        <div className="text-sm font-semibold">View Analytics</div>
                       </div>
                     </Button>
                   </div>

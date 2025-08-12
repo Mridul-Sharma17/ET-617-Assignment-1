@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import clickstreamService from '@/services/clickstreamService';
 
 // Enhanced logger for course viewer
 const courseLogger = {
@@ -30,6 +31,7 @@ const courseLogger = {
 function TextContent({ course }) {
   useEffect(() => {
     courseLogger.info('Text content displayed', { courseId: course.id });
+    clickstreamService.trackTextContentView(course.id);
   }, [course.id]);
 
   return (
@@ -107,10 +109,12 @@ function VideoContent({ course }) {
 
   const handleVideoPlay = () => {
     courseLogger.interaction('Video play started', { courseId: course.id });
+    clickstreamService.trackVideoPlay(course.id, course.videoUrl);
   };
 
   const handleVideoPause = () => {
     courseLogger.interaction('Video paused', { courseId: course.id });
+    clickstreamService.trackVideoPause(course.id, course.videoUrl, 0); // currentTime would need to be tracked
   };
 
   return (
@@ -179,15 +183,27 @@ function QuizContent({ course }) {
       courseId: course.id, 
       totalQuestions: questions.length 
     });
+    
+    // Track quiz start
+    if (questions.length > 0) {
+      clickstreamService.trackQuizStart(course.id, course.title, questions.length);
+    }
   }, [course.id, questions.length]);
 
   const handleAnswerSelect = (answerIndex) => {
     setSelectedAnswer(answerIndex);
+    const question = questions[currentQuestion];
+    const isCorrect = answerIndex === question?.correct;
+    
     courseLogger.interaction('Quiz answer selected', { 
       courseId: course.id, 
       questionIndex: currentQuestion,
-      selectedAnswer: answerIndex 
+      selectedAnswer: answerIndex,
+      isCorrect
     });
+    
+    // Track quiz answer in clickstream
+    clickstreamService.trackQuizAnswer(course.id, currentQuestion, answerIndex, isCorrect);
   };
 
   const handleNextQuestion = () => {
@@ -202,17 +218,26 @@ function QuizContent({ course }) {
         nextQuestion: currentQuestion + 1 
       });
     } else {
+      // Quiz completed - calculate score and track completion
+      const score = calculateScore(newAnswers);
+      const timeSpent = Date.now() - parseInt(clickstreamService.sessionId.split('_')[1]);
+      
       setShowResults(true);
       courseLogger.success('Quiz completed', { 
         courseId: course.id, 
-        answers: newAnswers 
+        answers: newAnswers,
+        score,
+        timeSpent 
       });
+      
+      // Track quiz completion in clickstream
+      clickstreamService.trackQuizComplete(course.id, score, questions.length, timeSpent);
     }
   };
 
-  const calculateScore = () => {
+  const calculateScore = (answersArray = answers) => {
     let correct = 0;
-    answers.forEach((answer, index) => {
+    answersArray.forEach((answer, index) => {
       if (answer === questions[index]?.correct) {
         correct++;
       }
