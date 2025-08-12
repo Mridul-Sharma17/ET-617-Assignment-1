@@ -1,8 +1,68 @@
 [
   {
     "id": 1,
-    "title": "Introduction to Programming",
+    "title": "Introduction to Web Development",
     "type": "text",
-    "createdAt": "2025-08-11T18:00:05.389Z"
+    "description": "Learn the basics of HTML, CSS, and JavaScript",
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 2,
+    "title": "JavaScript Fundamentals",
+    "type": "video",
+    "description": "Master JavaScript concepts with practical examples",
+    "videoUrl": "https://www.youtube.com/watch?v=PkZNo7MFNFg",
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 3,
+    "title": "HTML Basics Quiz",
+    "type": "quiz",
+    "description": "Test your HTML knowledge with interactive questions",
+    "quizData": {
+      "questions": [
+        {
+          "question": "What does HTML stand for?",
+          "options": [
+            "Hyper Text Markup Language",
+            "High Tech Modern Language",
+            "Home Tool Markup Language",
+            "Hyperlink and Text Markup Language"
+          ],
+          "correct": 0
+        },
+        {
+          "question": "Which HTML tag is used for the largest heading?",
+          "options": [
+            "<h6>",
+            "<h1>",
+            "<head>",
+            "<header>"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is the correct HTML tag for creating a hyperlink?",
+          "options": [
+            "<link>",
+            "<a>",
+            "<href>",
+            "<url>"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Which attribute specifies the URL of the page the link goes to?",
+          "options": [
+            "src",
+            "href",
+            "url",
+            "link"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    "createdAt": "2025-08-12T10:13:42.949Z"
   }
 ]

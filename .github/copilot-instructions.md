@@ -4,3 +4,4 @@
 # Always search on web for debugging.
 # Always make all files with verbose logging, use best logging practices and use such logging library which provides detailed logging of each step, so that any issue if there is any is pinpointed.
 # Always go through all the relevant workspace files and directories whenever debugging to understand how the setup is done instead of hallucinating.
+# Always run servers (frontend or backend) in the background terminal using '&'.

@@ -4,9 +4,11 @@
  * Includes comprehensive logging and state management
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import Authentication from '@/components/Authentication';
+import CoursesPage from '@/components/pages/CoursesPage';
+import CourseViewer from '@/components/pages/CourseViewer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -37,13 +39,52 @@ const appLogger = {
 // Main Dashboard Component (shown when authenticated)
 function Dashboard() {
   const { user, logout } = useAuth();
+  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  appLogger.info('Dashboard component rendered', { user: user?.username });
+  appLogger.info('Dashboard component rendered', { user: user?.username, currentPage });
 
   const handleLogout = () => {
     appLogger.user('User initiated logout');
     logout();
   };
+
+  // Navigation handlers
+  const handleBrowseCourses = () => {
+    appLogger.info('Navigating to courses page');
+    setCurrentPage('courses');
+  };
+
+  const handleBackToDashboard = () => {
+    appLogger.info('Navigating back to dashboard');
+    setCurrentPage('dashboard');
+    setSelectedCourse(null);
+  };
+
+  const handleSelectCourse = (course) => {
+    appLogger.info('Course selected', { courseId: course.id });
+    setSelectedCourse(course);
+    setCurrentPage('course-view');
+  };
+
+  // Render different pages based on currentPage state
+  if (currentPage === 'courses') {
+    return (
+      <CoursesPage 
+        onBack={handleBackToDashboard}
+        onSelectCourse={handleSelectCourse}
+      />
+    );
+  }
+
+  if (currentPage === 'course-view' && selectedCourse) {
+    return (
+      <CourseViewer 
+        course={selectedCourse}
+        onBack={handleBackToDashboard}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -212,7 +253,10 @@ function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Button className="h-24 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <Button 
+                      onClick={handleBrowseCourses}
+                      className="h-24 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
                       <div className="text-center space-y-2">
                         <div className="text-3xl group-hover:scale-110 transition-transform duration-300">📚</div>
                         <div className="text-sm font-semibold">Browse Courses</div>
