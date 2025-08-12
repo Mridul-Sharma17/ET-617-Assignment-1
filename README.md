@@ -2,6 +2,10 @@
 
 A MERN stack learning platform that tracks user interactions and provides interactive content including text, videos, and quizzes.
 
+## 🌐 Live Demo
+- **Frontend**: Deployed on Vercel
+- **Backend**: Deployed on Railway
+
 ## 🚀 Features
 
 - User registration and authentication
