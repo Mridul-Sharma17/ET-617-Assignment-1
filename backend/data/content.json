@@ -3,22 +3,35 @@
     "id": 1,
     "title": "Introduction to Web Development",
     "type": "text",
-    "description": "Learn the basics of HTML, CSS, and JavaScript",
+    "category": "Web Development",
+    "level": "Beginner",
+    "duration": "30 min",
+    "description": "Learn the basics of HTML, CSS, and JavaScript to start your web development journey",
+    "content": "Web development is the process of creating websites and web applications. It involves three main technologies: HTML (HyperText Markup Language) for structure, CSS (Cascading Style Sheets) for styling, and JavaScript for interactivity. HTML provides the skeleton of web pages using elements like headings, paragraphs, and links. CSS controls the visual presentation, including colors, fonts, and layouts. JavaScript adds dynamic behavior, enabling user interactions and data manipulation. Modern web development also includes frameworks like React, Angular, and Vue.js that simplify complex applications. Understanding these fundamentals is essential for anyone looking to build modern, responsive websites.",
+    "tags": ["HTML", "CSS", "JavaScript", "Frontend"],
     "createdAt": "2025-08-12T10:13:42.949Z"
   },
   {
     "id": 2,
     "title": "JavaScript Fundamentals",
     "type": "video",
-    "description": "Master JavaScript concepts with practical examples",
+    "category": "Programming",
+    "level": "Beginner",
+    "duration": "45 min",
+    "description": "Master JavaScript concepts with practical examples and hands-on coding",
     "videoUrl": "https://www.youtube.com/watch?v=PkZNo7MFNFg",
+    "tags": ["JavaScript", "Programming", "Variables", "Functions"],
     "createdAt": "2025-08-12T10:13:42.949Z"
   },
   {
     "id": 3,
     "title": "HTML Basics Quiz",
     "type": "quiz",
-    "description": "Test your HTML knowledge with interactive questions",
+    "category": "Web Development",
+    "level": "Beginner",
+    "duration": "15 min",
+    "description": "Test your HTML knowledge with interactive questions and immediate feedback",
+    "tags": ["HTML", "Assessment", "Beginner"],
     "quizData": {
       "questions": [
         {
@@ -58,6 +71,253 @@
             "href",
             "url",
             "link"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is the correct HTML tag for inserting an image?",
+          "options": [
+            "<image>",
+            "<img>",
+            "<picture>",
+            "<src>"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 4,
+    "title": "React.js Complete Guide",
+    "type": "text",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "duration": "60 min",
+    "description": "Comprehensive guide to building modern web applications with React.js",
+    "content": "React.js is a powerful JavaScript library for building user interfaces, particularly single-page applications. Created by Facebook, React uses a component-based architecture that makes code reusable and maintainable. Key concepts include JSX (JavaScript XML) for writing component templates, state management for handling dynamic data, and props for passing data between components. React's virtual DOM efficiently updates the user interface by comparing changes and updating only what's necessary. Hooks like useState and useEffect provide functional components with state and lifecycle capabilities. Modern React development often includes tools like Create React App for quick setup, React Router for navigation, and state management libraries like Redux or Context API for complex applications.",
+    "tags": ["React", "JavaScript", "Components", "JSX", "Hooks"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 5,
+    "title": "CSS Grid and Flexbox Tutorial",
+    "type": "video",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "duration": "40 min",
+    "description": "Master modern CSS layout techniques with Grid and Flexbox",
+    "videoUrl": "https://www.youtube.com/watch?v=9zBsdzdE4sM",
+    "tags": ["CSS", "Layout", "Grid", "Flexbox", "Responsive"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 6,
+    "title": "JavaScript ES6+ Quiz",
+    "type": "quiz",
+    "category": "Programming",
+    "level": "Intermediate",
+    "duration": "20 min",
+    "description": "Test your knowledge of modern JavaScript features and syntax",
+    "tags": ["JavaScript", "ES6", "Arrow Functions", "Promises"],
+    "quizData": {
+      "questions": [
+        {
+          "question": "What is the correct syntax for an arrow function?",
+          "options": [
+            "const func = () => {}",
+            "const func = -> {}",
+            "const func = function() => {}",
+            "const func => () {}"
+          ],
+          "correct": 0
+        },
+        {
+          "question": "Which method is used to handle asynchronous operations in JavaScript?",
+          "options": [
+            "setTimeout",
+            "Promise",
+            "callback",
+            "All of the above"
+          ],
+          "correct": 3
+        },
+        {
+          "question": "What does the spread operator (...) do?",
+          "options": [
+            "Combines arrays",
+            "Spreads array elements",
+            "Clones objects",
+            "All of the above"
+          ],
+          "correct": 3
+        },
+        {
+          "question": "Which ES6 feature allows you to extract values from arrays or objects?",
+          "options": [
+            "Destructuring",
+            "Spreading",
+            "Mapping",
+            "Filtering"
+          ],
+          "correct": 0
+        }
+      ]
+    },
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 7,
+    "title": "Node.js Backend Development",
+    "type": "text",
+    "category": "Backend Development",
+    "level": "Intermediate",
+    "duration": "50 min",
+    "description": "Learn server-side JavaScript development with Node.js and Express",
+    "content": "Node.js enables JavaScript development on the server side, allowing developers to use the same language for both frontend and backend. Built on Chrome's V8 engine, Node.js uses an event-driven, non-blocking I/O model that makes it efficient for handling concurrent requests. Express.js is the most popular Node.js framework, providing a minimal and flexible web application framework with robust features for web and mobile applications. Key concepts include middleware for request processing, routing for handling different endpoints, and integration with databases like MongoDB or PostgreSQL. Node.js is ideal for building REST APIs, real-time applications with WebSockets, and microservices architectures. Package management through npm (Node Package Manager) provides access to thousands of open-source modules.",
+    "tags": ["Node.js", "Express", "Backend", "API", "Server"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 8,
+    "title": "Python Programming Basics",
+    "type": "video",
+    "category": "Programming",
+    "level": "Beginner",
+    "duration": "55 min",
+    "description": "Get started with Python programming language fundamentals",
+    "videoUrl": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+    "tags": ["Python", "Programming", "Variables", "Functions", "Loops"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 9,
+    "title": "Database Design Quiz",
+    "type": "quiz",
+    "category": "Database",
+    "level": "Intermediate",
+    "duration": "25 min",
+    "description": "Test your understanding of database concepts and SQL",
+    "tags": ["Database", "SQL", "Design", "Normalization"],
+    "quizData": {
+      "questions": [
+        {
+          "question": "What does SQL stand for?",
+          "options": [
+            "Structured Query Language",
+            "Simple Query Language",
+            "Standard Query Language",
+            "System Query Language"
+          ],
+          "correct": 0
+        },
+        {
+          "question": "Which SQL command is used to retrieve data from a database?",
+          "options": [
+            "GET",
+            "SELECT",
+            "RETRIEVE",
+            "FETCH"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is a primary key in a database table?",
+          "options": [
+            "The first column in a table",
+            "A unique identifier for each record",
+            "The most important column",
+            "A foreign key reference"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is database normalization?",
+          "options": [
+            "Making database faster",
+            "Organizing data to reduce redundancy",
+            "Creating backups",
+            "Encrypting data"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 10,
+    "title": "Machine Learning Fundamentals",
+    "type": "text",
+    "category": "Data Science",
+    "level": "Advanced",
+    "duration": "70 min",
+    "description": "Introduction to machine learning concepts, algorithms, and applications",
+    "content": "Machine Learning (ML) is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. There are three main types: supervised learning (using labeled data), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through rewards and penalties). Common algorithms include linear regression for prediction, decision trees for classification, clustering for grouping similar data, and neural networks for complex pattern recognition. The ML workflow involves data collection, preprocessing, feature selection, model training, evaluation, and deployment. Popular tools include Python libraries like scikit-learn, TensorFlow, and PyTorch. Applications span across industries: recommendation systems, image recognition, natural language processing, fraud detection, and autonomous vehicles. Understanding statistics, linear algebra, and programming is essential for effective machine learning implementation.",
+    "tags": ["Machine Learning", "AI", "Algorithms", "Data Science", "Python"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 11,
+    "title": "Advanced JavaScript Concepts",
+    "type": "video",
+    "category": "Programming",
+    "level": "Advanced",
+    "duration": "65 min",
+    "description": "Deep dive into closures, prototypes, async/await, and advanced patterns",
+    "videoUrl": "https://www.youtube.com/watch?v=2ZphE5HcQPQ",
+    "tags": ["JavaScript", "Closures", "Prototypes", "Async", "Advanced"],
+    "createdAt": "2025-08-12T10:13:42.949Z"
+  },
+  {
+    "id": 12,
+    "title": "React Hooks Mastery Quiz",
+    "type": "quiz",
+    "category": "Web Development",
+    "level": "Advanced",
+    "duration": "30 min",
+    "description": "Advanced quiz on React Hooks including custom hooks and optimization",
+    "tags": ["React", "Hooks", "useState", "useEffect", "Custom Hooks"],
+    "quizData": {
+      "questions": [
+        {
+          "question": "Which hook is used for managing component state in functional components?",
+          "options": [
+            "useEffect",
+            "useState",
+            "useContext",
+            "useReducer"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "When does useEffect run by default?",
+          "options": [
+            "Only on mount",
+            "Only on unmount",
+            "After every render",
+            "Before every render"
+          ],
+          "correct": 2
+        },
+        {
+          "question": "How do you optimize a component to prevent unnecessary re-renders?",
+          "options": [
+            "useMemo",
+            "useCallback",
+            "React.memo",
+            "All of the above"
+          ],
+          "correct": 3
+        },
+        {
+          "question": "What is the purpose of the dependency array in useEffect?",
+          "options": [
+            "To list all variables used in the effect",
+            "To control when the effect runs",
+            "To prevent memory leaks",
+            "To optimize performance"
           ],
           "correct": 1
         }
