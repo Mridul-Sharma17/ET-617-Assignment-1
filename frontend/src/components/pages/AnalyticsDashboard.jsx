@@ -54,126 +54,6 @@ export function AnalyticsDashboard({ onBack }) {
     }
   };
 
-  // Export functions
-  const exportToCSV = () => {
-    if (!analyticsData?.data) return;
-    
-    const csvHeaders = ['Timestamp', 'User ID', 'Session ID', 'Event Type', 'Event Data', 'User Agent'];
-    const csvRows = analyticsData.data.map(event => [
-      event.timestamp,
-      event.userId || 'N/A',
-      event.sessionId || 'N/A',
-      event.eventType || event.action || 'N/A',
-      JSON.stringify(event.eventData || event.additionalData || {}),
-      event.userAgent || 'N/A'
-    ]);
-    
-    const csvContent = [csvHeaders, ...csvRows]
-      .map(row => row.map(field => `"${field}"`).join(','))
-      .join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `clickstream-analytics-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-    
-    analyticsLogger.success('CSV export completed', { totalRows: csvRows.length });
-  };
-
-  const exportToJSON = () => {
-    if (!analyticsData?.data) return;
-    
-    const jsonData = {
-      exportDate: new Date().toISOString(),
-      totalEvents: analyticsData.data.length,
-      analytics: analytics,
-      rawData: analyticsData.data
-    };
-    
-    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `clickstream-analytics-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-    
-    analyticsLogger.success('JSON export completed', { totalEvents: jsonData.totalEvents });
-  };
-
-  const printReport = () => {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Learning Analytics Report</title>
-          <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
-            .metrics { display: flex; justify-content: space-around; margin: 20px 0; }
-            .metric { text-align: center; padding: 10px; border: 1px solid #ddd; }
-            .metric h3 { margin: 0; color: #333; }
-            .metric .value { font-size: 24px; font-weight: bold; color: #007bff; }
-            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>Learning Analytics Report</h1>
-            <p>Generated on: ${new Date().toLocaleString()}</p>
-          </div>
-          
-          <div class="metrics">
-            <div class="metric">
-              <h3>Total Events</h3>
-              <div class="value">${analytics?.totalEvents || 0}</div>
-            </div>
-            <div class="metric">
-              <h3>Unique Sessions</h3>
-              <div class="value">${analytics?.uniqueSessions || 0}</div>
-            </div>
-            <div class="metric">
-              <h3>Quiz Completions</h3>
-              <div class="value">${analytics?.quizCompletions?.length || 0}</div>
-            </div>
-          </div>
-          
-          ${analytics?.quizCompletions?.length > 0 ? `
-            <h2>Quiz Performance</h2>
-            <table>
-              <tr><th>Course</th><th>Score</th><th>Percentage</th><th>Date</th></tr>
-              ${analytics.quizCompletions.map(quiz => `
-                <tr>
-                  <td>${quiz.courseTitle || 'Unknown'}</td>
-                  <td>${quiz.score}/${quiz.totalQuestions}</td>
-                  <td>${quiz.percentage}%</td>
-                  <td>${new Date(quiz.timestamp).toLocaleDateString()}</td>
-                </tr>
-              `).join('')}
-            </table>
-          ` : ''}
-          
-          <h2>Event Types Distribution</h2>
-          <table>
-            <tr><th>Event Type</th><th>Count</th></tr>
-            ${Object.entries(analytics?.eventTypes || {}).map(([type, count]) => `
-              <tr><td>${type.replace('_', ' ').toUpperCase()}</td><td>${count}</td></tr>
-            `).join('')}
-          </table>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.print();
-    
-    analyticsLogger.success('Print report generated');
-  };
-
   useEffect(() => {
     fetchAnalytics();
   }, []);
@@ -307,32 +187,12 @@ export function AnalyticsDashboard({ onBack }) {
               <p className="text-gray-400">Insights from clickstream data</p>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
-            <Button onClick={exportToCSV} className="bg-green-600 hover:bg-green-700">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Export CSV
-            </Button>
-            <Button onClick={exportToJSON} className="bg-purple-600 hover:bg-purple-700">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-              </svg>
-              Export JSON
-            </Button>
-            <Button onClick={printReport} className="bg-gray-600 hover:bg-gray-700">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-              </svg>
-              Print Report
-            </Button>
-            <Button onClick={fetchAnalytics} className="bg-blue-600 hover:bg-blue-700">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Refresh
-            </Button>
-          </div>
+          <Button onClick={fetchAnalytics} className="bg-blue-600 hover:bg-blue-700">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh Data
+          </Button>
         </div>
 
         {/* Overview Cards */}

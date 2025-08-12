@@ -10,6 +10,7 @@ import Authentication from '@/components/Authentication';
 import CoursesPage from '@/components/pages/CoursesPage';
 import CourseViewer from '@/components/pages/CourseViewer';
 import AnalyticsDashboard from '@/components/pages/AnalyticsDashboard';
+import LearningProgress from '@/components/pages/LearningProgress';
 import clickstreamService from '@/services/clickstreamService';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
