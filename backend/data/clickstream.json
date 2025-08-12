@@ -1726,5 +1726,1000 @@
     },
     "ip": "::1",
     "action": "button_click"
+  },
+  {
+    "id": 1755029455806,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029425825_uujznwg4h",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:10:55.798Z"
+    },
+    "timestamp": "2025-08-12T20:10:55.798Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start"
+  },
+  {
+    "id": 1755029455816,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029425825_uujznwg4h",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:10:55.800Z"
+    },
+    "timestamp": "2025-08-12T20:10:55.800Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start"
+  },
+  {
+    "id": 1755029466015,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "dashboard",
+      "to": "courses"
+    },
+    "timestamp": "2025-08-12T20:11:06.005Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation"
+  },
+  {
+    "id": 1755029466018,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "browse_courses",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:11:06.005Z"
+    },
+    "timestamp": "2025-08-12T20:11:06.005Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click"
+  },
+  {
+    "id": 1755029467592,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "courses",
+      "to": "course-view"
+    },
+    "timestamp": "2025-08-12T20:11:07.589Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation"
+  },
+  {
+    "id": 1755029467596,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "course_view",
+    "eventData": {
+      "courseId": 1,
+      "courseTitle": "Introduction to Web Development",
+      "courseType": "text",
+      "viewStartTime": "2025-08-12T20:11:07.590Z"
+    },
+    "timestamp": "2025-08-12T20:11:07.590Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "course_view"
+  },
+  {
+    "id": 1755029467599,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "select_course",
+      "context": {
+        "courseId": 1,
+        "courseTitle": "Introduction to Web Development",
+        "courseType": "text"
+      },
+      "clickTime": "2025-08-12T20:11:07.590Z"
+    },
+    "timestamp": "2025-08-12T20:11:07.590Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click"
+  },
+  {
+    "id": 1755029467603,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "text_content_view",
+    "eventData": {
+      "courseId": 1,
+      "scrollDepth": 0,
+      "viewTime": "2025-08-12T20:11:07.598Z"
+    },
+    "timestamp": "2025-08-12T20:11:07.598Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "text_content_view"
+  },
+  {
+    "id": 1755029467606,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "text_content_view",
+    "eventData": {
+      "courseId": 1,
+      "scrollDepth": 0,
+      "viewTime": "2025-08-12T20:11:07.599Z"
+    },
+    "timestamp": "2025-08-12T20:11:07.599Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "text_content_view"
+  },
+  {
+    "id": 1755029468945,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "course-view",
+      "to": "dashboard"
+    },
+    "timestamp": "2025-08-12T20:11:08.942Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation"
+  },
+  {
+    "id": 1755029468948,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "course-view"
+      },
+      "clickTime": "2025-08-12T20:11:08.943Z"
+    },
+    "timestamp": "2025-08-12T20:11:08.943Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click"
+  },
+  {
+    "id": 1755029526395,
+    "sessionId": "session_1755029526350_4s1jh3i94",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029526350_4s1jh3i94",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:12:06.385Z"
+    },
+    "timestamp": "2025-08-12T20:12:06.385Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start"
+  },
+  {
+    "id": 1755029526397,
+    "sessionId": "session_1755029526350_4s1jh3i94",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029526350_4s1jh3i94",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:12:06.386Z"
+    },
+    "timestamp": "2025-08-12T20:12:06.386Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start"
+  },
+  {
+    "id": 1755029558946,
+    "sessionId": "session_1755029425825_uujznwg4h",
+    "userId": "anonymous",
+    "eventType": "session_end",
+    "eventData": {
+      "sessionDuration": 133110,
+      "endTime": "2025-08-12T20:12:38.935Z"
+    },
+    "timestamp": "2025-08-12T20:12:38.935Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_end"
+  },
+  {
+    "id": 1755029558948,
+    "sessionId": "session_1755029526350_4s1jh3i94",
+    "userId": "anonymous",
+    "eventType": "session_end",
+    "eventData": {
+      "sessionDuration": 32586,
+      "endTime": "2025-08-12T20:12:38.936Z"
+    },
+    "timestamp": "2025-08-12T20:12:38.936Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_end"
+  },
+  {
+    "id": 1755029583068,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029573671_8qt3osb1d",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:13:03.057Z"
+    },
+    "timestamp": "2025-08-12T20:13:03.057Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755029573671_8qt3osb1d",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:13:03.057Z"
+    }
+  },
+  {
+    "id": 1755029583072,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "session_start",
+    "eventData": {
+      "user": "anonymous",
+      "sessionId": "session_1755029573671_8qt3osb1d",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:13:03.059Z"
+    },
+    "timestamp": "2025-08-12T20:13:03.059Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "session_start",
+    "details": {
+      "user": "anonymous",
+      "sessionId": "session_1755029573671_8qt3osb1d",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 924
+      },
+      "timestamp": "2025-08-12T20:13:03.059Z"
+    }
+  },
+  {
+    "id": 1755029590987,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "dashboard",
+      "to": "courses"
+    },
+    "timestamp": "2025-08-12T20:13:10.975Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "dashboard",
+      "to": "courses"
+    }
+  },
+  {
+    "id": 1755029590990,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "browse_courses",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:10.976Z"
+    },
+    "timestamp": "2025-08-12T20:13:10.976Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "browse_courses",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:10.976Z"
+    }
+  },
+  {
+    "id": 1755029596004,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "courses",
+      "to": "course-view"
+    },
+    "timestamp": "2025-08-12T20:13:15.991Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "courses",
+      "to": "course-view"
+    }
+  },
+  {
+    "id": 1755029596008,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "course_view",
+    "eventData": {
+      "courseId": 2,
+      "courseTitle": "JavaScript Fundamentals",
+      "courseType": "video",
+      "viewStartTime": "2025-08-12T20:13:15.992Z"
+    },
+    "timestamp": "2025-08-12T20:13:15.992Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "course_view",
+    "details": {
+      "courseId": 2,
+      "courseTitle": "JavaScript Fundamentals",
+      "courseType": "video",
+      "viewStartTime": "2025-08-12T20:13:15.992Z"
+    }
+  },
+  {
+    "id": 1755029596012,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "select_course",
+      "context": {
+        "courseId": 2,
+        "courseTitle": "JavaScript Fundamentals",
+        "courseType": "video"
+      },
+      "clickTime": "2025-08-12T20:13:15.993Z"
+    },
+    "timestamp": "2025-08-12T20:13:15.993Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "select_course",
+      "context": {
+        "courseId": 2,
+        "courseTitle": "JavaScript Fundamentals",
+        "courseType": "video"
+      },
+      "clickTime": "2025-08-12T20:13:15.993Z"
+    }
+  },
+  {
+    "id": 1755029598686,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "course-view",
+      "to": "courses"
+    },
+    "timestamp": "2025-08-12T20:13:18.682Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "course-view",
+      "to": "courses"
+    }
+  },
+  {
+    "id": 1755029598691,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_courses",
+      "context": {
+        "from": "course-view"
+      },
+      "clickTime": "2025-08-12T20:13:18.683Z"
+    },
+    "timestamp": "2025-08-12T20:13:18.683Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "back_to_courses",
+      "context": {
+        "from": "course-view"
+      },
+      "clickTime": "2025-08-12T20:13:18.683Z"
+    }
+  },
+  {
+    "id": 1755029599731,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "courses",
+      "to": "dashboard"
+    },
+    "timestamp": "2025-08-12T20:13:19.728Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "courses",
+      "to": "dashboard"
+    }
+  },
+  {
+    "id": 1755029599734,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "courses"
+      },
+      "clickTime": "2025-08-12T20:13:19.729Z"
+    },
+    "timestamp": "2025-08-12T20:13:19.729Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "courses"
+      },
+      "clickTime": "2025-08-12T20:13:19.729Z"
+    }
+  },
+  {
+    "id": 1755029602747,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "dashboard",
+      "to": "quiz"
+    },
+    "timestamp": "2025-08-12T20:13:22.738Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "dashboard",
+      "to": "quiz"
+    }
+  },
+  {
+    "id": 1755029602751,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "take_quiz",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:22.739Z"
+    },
+    "timestamp": "2025-08-12T20:13:22.739Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "take_quiz",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:22.739Z"
+    }
+  },
+  {
+    "id": 1755029602762,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "page_view",
+    "eventData": {
+      "page": "quiz",
+      "timestamp": "2025-08-12T20:13:22.759Z",
+      "quizCount": 1
+    },
+    "timestamp": "2025-08-12T20:13:22.759Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "page_view",
+    "details": {
+      "page": "quiz",
+      "timestamp": "2025-08-12T20:13:22.759Z",
+      "quizCount": 1
+    }
+  },
+  {
+    "id": 1755029602776,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "page_view",
+    "eventData": {
+      "page": "quiz",
+      "timestamp": "2025-08-12T20:13:22.773Z",
+      "quizCount": 1
+    },
+    "timestamp": "2025-08-12T20:13:22.773Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "page_view",
+    "details": {
+      "page": "quiz",
+      "timestamp": "2025-08-12T20:13:22.773Z",
+      "quizCount": 1
+    }
+  },
+  {
+    "id": 1755029604941,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "quiz",
+      "to": "dashboard"
+    },
+    "timestamp": "2025-08-12T20:13:24.938Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "quiz",
+      "to": "dashboard"
+    }
+  },
+  {
+    "id": 1755029604944,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "quiz"
+      },
+      "clickTime": "2025-08-12T20:13:24.939Z"
+    },
+    "timestamp": "2025-08-12T20:13:24.939Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "quiz"
+      },
+      "clickTime": "2025-08-12T20:13:24.939Z"
+    }
+  },
+  {
+    "id": 1755029606309,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "dashboard",
+      "to": "courses"
+    },
+    "timestamp": "2025-08-12T20:13:26.306Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "dashboard",
+      "to": "courses"
+    }
+  },
+  {
+    "id": 1755029606313,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "browse_courses",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:26.307Z"
+    },
+    "timestamp": "2025-08-12T20:13:26.307Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "browse_courses",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:26.307Z"
+    }
+  },
+  {
+    "id": 1755029610093,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "courses",
+      "to": "dashboard"
+    },
+    "timestamp": "2025-08-12T20:13:30.085Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "courses",
+      "to": "dashboard"
+    }
+  },
+  {
+    "id": 1755029610096,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "courses"
+      },
+      "clickTime": "2025-08-12T20:13:30.086Z"
+    },
+    "timestamp": "2025-08-12T20:13:30.086Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "courses"
+      },
+      "clickTime": "2025-08-12T20:13:30.086Z"
+    }
+  },
+  {
+    "id": 1755029612106,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "dashboard",
+      "to": "analytics"
+    },
+    "timestamp": "2025-08-12T20:13:32.103Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "dashboard",
+      "to": "analytics"
+    }
+  },
+  {
+    "id": 1755029612109,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "view_analytics",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:32.103Z"
+    },
+    "timestamp": "2025-08-12T20:13:32.103Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "view_analytics",
+      "context": {
+        "from": "dashboard"
+      },
+      "clickTime": "2025-08-12T20:13:32.103Z"
+    }
+  },
+  {
+    "id": 1755029622122,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "navigation",
+    "eventData": {
+      "from": "analytics",
+      "to": "dashboard"
+    },
+    "timestamp": "2025-08-12T20:13:42.114Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "navigation",
+    "details": {
+      "from": "analytics",
+      "to": "dashboard"
+    }
+  },
+  {
+    "id": 1755029622124,
+    "sessionId": "session_1755029573671_8qt3osb1d",
+    "userId": "anonymous",
+    "eventType": "button_click",
+    "eventData": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "analytics"
+      },
+      "clickTime": "2025-08-12T20:13:42.115Z"
+    },
+    "timestamp": "2025-08-12T20:13:42.115Z",
+    "url": "http://localhost:5173/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 924
+    },
+    "ip": "::1",
+    "action": "button_click",
+    "details": {
+      "buttonName": "back_to_dashboard",
+      "context": {
+        "from": "analytics"
+      },
+      "clickTime": "2025-08-12T20:13:42.115Z"
+    }
   }
 ]

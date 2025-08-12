@@ -128,7 +128,8 @@ app.post('/api/auth/register', (req, res) => {
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
-      user: userResponse
+      user: userResponse,
+      token: `mock-jwt-token-${newUser.id}` // Add token for auto-login after registration
     });
     
   } catch (error) {
@@ -254,7 +255,9 @@ app.post('/api/clickstream', (req, res) => {
       action: req.body.action || req.body.eventType,
       elementId: req.body.elementId,
       page: req.body.page,
-      additionalData: req.body.additionalData
+      additionalData: req.body.additionalData,
+      // Add details field for event context
+      details: req.body.details || req.body.eventData
     };
     
     const clickstream = readDB('clickstream');
@@ -313,6 +316,36 @@ app.get('/api/analytics/clickstream', (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to fetch analytics data'
+    });
+  }
+});
+
+// Get user-specific clickstream data
+app.get('/api/clickstream/user/:userId', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const clickstream = readDB('clickstream');
+    
+    // Filter data for specific user
+    const userData = clickstream.filter(item => 
+      item.userId === userId || item.userId == userId
+    );
+    
+    // Sort by timestamp descending (most recent first)
+    userData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    res.json({
+      success: true,
+      userId,
+      totalActions: userData.length,
+      data: userData
+    });
+    
+  } catch (error) {
+    console.error('Error fetching user clickstream data:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch user data'
     });
   }
 });

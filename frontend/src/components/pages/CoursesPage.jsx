@@ -1,7 +1,7 @@
 /**
  * Courses Page Component
  * Displays available learning content/courses
- * Includes content filtering and interactive course cards
+ * Includes content filtering, search functionality and interactive course cards
  */
 
 import React, { useState, useEffect } from 'react';
@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
 
 // Enhanced logger for courses page
 const coursesLogger = {
@@ -28,6 +29,9 @@ export function CoursesPage({ onBack, onSelectCourse }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [levelFilter, setLevelFilter] = useState('all');
 
   coursesLogger.info('CoursesPage component rendered');
 
@@ -59,11 +63,34 @@ export function CoursesPage({ onBack, onSelectCourse }) {
     }
   };
 
-  // Filter courses by type
+  // Enhanced filtering with search and categories
   const filteredCourses = courses.filter(course => {
-    if (filter === 'all') return true;
-    return course.type === filter;
+    // Type filter
+    if (filter !== 'all' && course.type !== filter) return false;
+    
+    // Category filter
+    if (categoryFilter !== 'all' && course.category !== categoryFilter) return false;
+    
+    // Level filter
+    if (levelFilter !== 'all' && course.level !== levelFilter) return false;
+    
+    // Search filter
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      return (
+        course.title.toLowerCase().includes(searchLower) ||
+        course.description.toLowerCase().includes(searchLower) ||
+        (course.tags && course.tags.some(tag => tag.toLowerCase().includes(searchLower))) ||
+        (course.category && course.category.toLowerCase().includes(searchLower))
+      );
+    }
+    
+    return true;
   });
+
+  // Get unique categories and levels for filters
+  const categories = ['all', ...new Set(courses.map(course => course.category).filter(Boolean))];
+  const levels = ['all', ...new Set(courses.map(course => course.level).filter(Boolean))];
 
   // Get content type icon and color
   const getContentTypeInfo = (type) => {
@@ -155,8 +182,72 @@ export function CoursesPage({ onBack, onSelectCourse }) {
           </div>
         </div>
 
+        {/* Search and Filter Controls */}
+        <div className="space-y-4">
+          {/* Search Bar */}
+          <div className="max-w-md">
+            <Input
+              placeholder="Search courses, topics, or tags..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+            />
+          </div>
+          
+          {/* Filter Controls */}
+          <div className="flex flex-wrap gap-4">
+            {/* Type Filter */}
+            <div className="flex flex-wrap gap-2">
+              {['all', 'text', 'video', 'quiz'].map((filterType) => (
+                <Button
+                  key={filterType}
+                  variant={filter === filterType ? "default" : "outline"}
+                  onClick={() => setFilter(filterType)}
+                  className={`${
+                    filter === filterType
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'border-white/20 text-gray-300 hover:bg-white/10'
+                  }`}
+                >
+                  {filterType === 'all' ? '📚 All Content' : 
+                   filterType === 'text' ? '📄 Reading' :
+                   filterType === 'video' ? '🎥 Videos' : '📝 Quizzes'}
+                </Button>
+              ))}
+            </div>
+            
+            {/* Category Filter */}
+            <select 
+              value={categoryFilter} 
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="bg-white/10 border border-white/20 text-white rounded-md px-3 py-2 min-w-48"
+            >
+              <option value="all" className="bg-gray-800">All Categories</option>
+              {categories.slice(1).map((category) => (
+                <option key={category} value={category} className="bg-gray-800">
+                  {category}
+                </option>
+              ))}
+            </select>
+            
+            {/* Level Filter */}
+            <select 
+              value={levelFilter} 
+              onChange={(e) => setLevelFilter(e.target.value)}
+              className="bg-white/10 border border-white/20 text-white rounded-md px-3 py-2 min-w-40"
+            >
+              <option value="all" className="bg-gray-800">All Levels</option>
+              {levels.slice(1).map((level) => (
+                <option key={level} value={level} className="bg-gray-800">
+                  {level}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" style={{ display: 'none' }}>
           {['all', 'text', 'video', 'quiz'].map((filterType) => (
             <Button
               key={filterType}
@@ -210,10 +301,22 @@ export function CoursesPage({ onBack, onSelectCourse }) {
                         <div className={`${typeInfo.color} text-white rounded-lg p-2 shadow-lg`}>
                           <span className="text-xl">{typeInfo.icon}</span>
                         </div>
-                        <Badge variant="outline" className="bg-white/10 text-gray-300 border-white/20">
-                          {typeInfo.label}
-                        </Badge>
+                        <div className="flex flex-col gap-1">
+                          <Badge variant="outline" className="bg-white/10 text-gray-300 border-white/20 w-fit">
+                            {typeInfo.label}
+                          </Badge>
+                          {course.level && (
+                            <Badge variant="outline" className="bg-green-500/20 text-green-300 border-green-500/20 w-fit text-xs">
+                              {course.level}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
+                      {course.duration && (
+                        <Badge variant="outline" className="bg-purple-500/20 text-purple-300 border-purple-500/20">
+                          {course.duration}
+                        </Badge>
+                      )}
                     </div>
                     <CardTitle className="text-xl text-white group-hover:text-blue-200 transition-colors">
                       {course.title}
@@ -221,6 +324,39 @@ export function CoursesPage({ onBack, onSelectCourse }) {
                     <CardDescription className="text-gray-400">
                       {course.description || 'No description available'}
                     </CardDescription>
+                    
+                    {/* Category and Tags */}
+                    <div className="space-y-2 mt-3">
+                      {course.category && (
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs text-gray-500">Category:</span>
+                          <Badge variant="outline" className="bg-blue-500/20 text-blue-300 border-blue-500/20 text-xs">
+                            {course.category}
+                          </Badge>
+                        </div>
+                      )}
+                      {course.tags && course.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {course.tags.slice(0, 3).map((tag, index) => (
+                            <Badge 
+                              key={index} 
+                              variant="outline" 
+                              className="bg-orange-500/20 text-orange-300 border-orange-500/20 text-xs"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                          {course.tags.length > 3 && (
+                            <Badge 
+                              variant="outline" 
+                              className="bg-gray-500/20 text-gray-300 border-gray-500/20 text-xs"
+                            >
+                              +{course.tags.length - 3}
+                            </Badge>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </CardHeader>
                   
                   <CardContent className="pt-0">

@@ -47,11 +47,13 @@ class ClickstreamService {
    * Initialize clickstream tracking with user context
    */
   initialize(user) {
-    this.userId = user?.id || user?.username || 'anonymous';
+    // Prefer username for consistency, fallback to id, then anonymous
+    this.userId = user?.username || user?.id || 'anonymous';
     this.isInitialized = true;
     
     clickstreamLogger.success('Clickstream tracking initialized', {
       userId: this.userId,
+      userObject: user,
       sessionId: this.sessionId,
       timestamp: new Date().toISOString()
     });
@@ -59,6 +61,8 @@ class ClickstreamService {
     // Track session start
     this.trackEvent('session_start', {
       user: this.userId,
+      userUsername: user?.username,
+      userId: user?.id,
       sessionId: this.sessionId,
       userAgent: navigator.userAgent,
       viewport: {
@@ -82,7 +86,9 @@ class ClickstreamService {
       sessionId: this.sessionId,
       userId: this.userId,
       eventType,
+      action: eventType, // Add action field for backward compatibility
       eventData,
+      details: eventData, // Add details field for easier access
       timestamp: new Date().toISOString(),
       url: window.location.href,
       userAgent: navigator.userAgent,
@@ -176,6 +182,17 @@ class ClickstreamService {
     return this.trackEvent('navigation', {
       from,
       to,
+      ...data
+    });
+  }
+
+  /**
+   * Track page view events
+   */
+  trackPageView(pageName, data = {}) {
+    return this.trackEvent('page_view', {
+      page: pageName,
+      timestamp: new Date().toISOString(),
       ...data
     });
   }
@@ -308,15 +325,14 @@ class ClickstreamService {
   }
 
   /**
-   * Format duration in human readable format
+   * Format duration in seconds to readable format
    */
-  formatDuration(milliseconds) {
-    const seconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-
+  formatDuration(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    
     if (hours > 0) {
-      return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+      return `${hours}h ${minutes}m ${seconds % 60}s`;
     } else if (minutes > 0) {
       return `${minutes}m ${seconds % 60}s`;
     } else {

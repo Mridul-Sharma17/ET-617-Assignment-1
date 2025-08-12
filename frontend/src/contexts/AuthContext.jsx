@@ -273,11 +273,8 @@ export function AuthProvider({ children }) {
         body: JSON.stringify(userData)
       });
 
-      if (response.token) {
-        const { token } = response;
-        // The user object is the response itself, minus the token
-        const user = { ...response };
-        delete user.token;
+      if (response.success && response.token) {
+        const { user, token } = response;
 
         storeAuthData(user, token);
         dispatch({ 

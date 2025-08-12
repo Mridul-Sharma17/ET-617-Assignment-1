@@ -11,6 +11,8 @@ import CoursesPage from '@/components/pages/CoursesPage';
 import CourseViewer from '@/components/pages/CourseViewer';
 import AnalyticsDashboard from '@/components/pages/AnalyticsDashboard';
 import LearningProgress from '@/components/pages/LearningProgress';
+import QuizPage from '@/components/pages/QuizPage';
+import VideoPage from '@/components/pages/VideoPage';
 import clickstreamService from '@/services/clickstreamService';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -44,16 +46,201 @@ function Dashboard() {
   const { user, logout } = useAuth();
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedCourse, setSelectedCourse] = useState(null);
+  
+  // Statistics state
+  const [statistics, setStatistics] = useState({
+    coursesEnrolled: 0,
+    coursesCompleted: 0,
+    studyHours: 0,
+    achievements: 0,
+    recentActivities: [],
+    weeklyHours: 0,
+    streak: 0,
+    rank: 'Beginner',
+    overallProgress: 0
+  });
 
   appLogger.info('Dashboard component rendered', { user: user?.username, currentPage });
 
-  // Initialize clickstream tracking when Dashboard mounts
+  // Initialize clickstream tracking and load statistics when Dashboard mounts
   useEffect(() => {
     if (user) {
       clickstreamService.initialize(user);
-      appLogger.info('Clickstream tracking initialized for user', { user: user?.username });
+      appLogger.info('Clickstream tracking initialized for user', { 
+        user: user?.username,
+        userId: user?.id 
+      });
+      
+      // Add small delay to ensure clickstream is fully initialized
+      setTimeout(() => {
+        loadUserStatistics();
+      }, 500);
     }
   }, [user]);
+
+  // Function to load user statistics from API
+  const loadUserStatistics = async () => {
+    try {
+      const userId = user?.username || user?.id;
+      appLogger.info('Loading user statistics', { 
+        userId: userId,
+        endpoint: `http://localhost:5000/api/clickstream/user/${userId}` 
+      });
+      
+      // Fetch user's clickstream data to calculate statistics
+      const response = await fetch(`http://localhost:5000/api/clickstream/user/${userId}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const userData = await response.json();
+      
+      appLogger.info('API response received', { 
+        success: userData.success,
+        totalActions: userData.totalActions,
+        dataLength: userData.data?.length 
+      });
+      
+      if (userData.success && userData.data) {
+        const userActions = userData.data;
+        
+        // Calculate statistics from user actions
+        const courseViews = userActions.filter(action => action.action === 'course_view');
+        const quizStarts = userActions.filter(action => action.action === 'quiz_start');
+        const quizCompletes = userActions.filter(action => action.action === 'quiz_complete');
+        const videoPlays = userActions.filter(action => action.action === 'video_play');
+        
+        // Get unique courses viewed
+        const uniqueCourses = [...new Set(courseViews.map(action => action.details?.courseId).filter(Boolean))];
+        
+        // Calculate study time from session durations (approximate)
+        const sessionStartTimes = new Map();
+        let totalStudyMinutes = 0;
+        
+        userActions.forEach(action => {
+          const sessionId = action.sessionId;
+          if (!sessionStartTimes.has(sessionId)) {
+            sessionStartTimes.set(sessionId, new Date(action.timestamp));
+          }
+        });
+        
+        // Approximate 30 minutes per course viewed
+        totalStudyMinutes = uniqueCourses.length * 30;
+        
+        // Get recent activities (last 10 actions)
+        const recentActivities = userActions
+          .slice(-10)
+          .reverse()
+          .map(action => ({
+            id: action.id,
+            action: action.action,
+            details: action.details,
+            timestamp: action.timestamp
+          }));
+        
+        // Calculate achievements based on milestones
+        let achievements = 0;
+        if (uniqueCourses.length >= 1) achievements++; // First course viewed
+        if (quizStarts.length >= 1) achievements++; // First quiz attempt
+        if (videoPlays.length >= 1) achievements++; // First video watched
+        if (quizCompletes.length >= 1) achievements++; // First quiz completed
+        if (uniqueCourses.length >= 5) achievements++; // Course explorer
+        
+        // Calculate weekly hours (last 7 days)
+        const weekAgo = new Date();
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        const weeklyActions = userActions.filter(action => 
+          new Date(action.timestamp) >= weekAgo
+        );
+        const weeklyHours = Math.floor(weeklyActions.length * 5 / 60); // 5 minutes per action approx
+        
+        // Calculate streak (consecutive days with activity)
+        const dailyActivity = new Map();
+        userActions.forEach(action => {
+          const date = new Date(action.timestamp).toDateString();
+          dailyActivity.set(date, true);
+        });
+        
+        let streak = 0;
+        const today = new Date();
+        let currentDate = new Date(today);
+        
+        while (dailyActivity.has(currentDate.toDateString())) {
+          streak++;
+          currentDate.setDate(currentDate.getDate() - 1);
+        }
+        
+        // Determine rank based on activity
+        let rank = 'Beginner';
+        if (achievements >= 3) rank = 'Intermediate';
+        if (achievements >= 5) rank = 'Advanced';
+        if (achievements >= 7) rank = 'Expert';
+        
+        // Calculate overall progress (based on course completion)
+        const overallProgress = Math.min(100, Math.floor((quizCompletes.length / Math.max(uniqueCourses.length, 1)) * 100));
+        
+        setStatistics({
+          coursesEnrolled: uniqueCourses.length,
+          coursesCompleted: quizCompletes.length,
+          studyHours: Math.floor(totalStudyMinutes / 60),
+          achievements,
+          recentActivities,
+          weeklyHours,
+          streak,
+          rank,
+          overallProgress
+        });
+        
+        appLogger.success('User statistics loaded successfully', {
+          coursesEnrolled: uniqueCourses.length,
+          achievements,
+          studyHours: Math.floor(totalStudyMinutes / 60)
+        });
+      } else {
+        // Show sample activities for new users
+        const sampleActivities = [
+          {
+            id: 'sample-1',
+            action: 'course_view',
+            details: { courseTitle: 'Welcome to EduTrack Pro' },
+            timestamp: new Date().toISOString()
+          }
+        ];
+        
+        setStatistics(prev => ({
+          ...prev,
+          recentActivities: sampleActivities
+        }));
+      }
+    } catch (error) {
+      appLogger.info('Error loading statistics, using defaults', { error: error.message });
+      
+      // Show welcome activity for completely new users
+      const welcomeActivity = [
+        {
+          id: 'welcome-1',
+          action: 'course_view',
+          details: { courseTitle: 'Welcome to EduTrack Pro' },
+          timestamp: new Date().toISOString()
+        }
+      ];
+      
+      setStatistics(prev => ({
+        ...prev,
+        recentActivities: welcomeActivity
+      }));
+    }
+  };
+
+  // Function to refresh statistics after user actions
+  const refreshStatistics = () => {
+    if (user) {
+      setTimeout(() => {
+        loadUserStatistics();
+      }, 1000); // Small delay to ensure backend has processed the action
+    }
+  };
 
   const handleLogout = () => {
     appLogger.user('User initiated logout');
@@ -67,6 +254,7 @@ function Dashboard() {
     clickstreamService.trackNavigation('dashboard', 'courses');
     clickstreamService.trackButtonClick('browse_courses', { from: 'dashboard' });
     setCurrentPage('courses');
+    refreshStatistics();
   };
 
   const handleBackToDashboard = () => {
@@ -75,6 +263,16 @@ function Dashboard() {
     clickstreamService.trackButtonClick('back_to_dashboard', { from: currentPage });
     setCurrentPage('dashboard');
     setSelectedCourse(null);
+    refreshStatistics();
+  };
+
+  const handleBackToCourses = () => {
+    appLogger.info('Navigating back to courses');
+    clickstreamService.trackNavigation(currentPage, 'courses');
+    clickstreamService.trackButtonClick('back_to_courses', { from: currentPage });
+    setCurrentPage('courses');
+    setSelectedCourse(null);
+    refreshStatistics();
   };
 
   const handleSelectCourse = (course) => {
@@ -88,6 +286,7 @@ function Dashboard() {
     });
     setSelectedCourse(course);
     setCurrentPage('course-view');
+    refreshStatistics();
   };
 
   const handleViewAnalytics = () => {
@@ -95,6 +294,7 @@ function Dashboard() {
     clickstreamService.trackNavigation('dashboard', 'analytics');
     clickstreamService.trackButtonClick('view_analytics', { from: 'dashboard' });
     setCurrentPage('analytics');
+    refreshStatistics();
   };
 
   const handleViewProgress = () => {
@@ -102,6 +302,23 @@ function Dashboard() {
     clickstreamService.trackNavigation('dashboard', 'progress');
     clickstreamService.trackButtonClick('view_progress', { from: 'dashboard' });
     setCurrentPage('progress');
+    refreshStatistics();
+  };
+
+  const handleTakeQuiz = () => {
+    appLogger.info('Navigating to quiz section');
+    clickstreamService.trackNavigation('dashboard', 'quiz');
+    clickstreamService.trackButtonClick('take_quiz', { from: 'dashboard' });
+    setCurrentPage('quiz');
+    refreshStatistics();
+  };
+
+  const handleWatchVideos = () => {
+    appLogger.info('Navigating to video section');
+    clickstreamService.trackNavigation('dashboard', 'videos');
+    clickstreamService.trackButtonClick('watch_videos', { from: 'dashboard' });
+    setCurrentPage('videos');
+    refreshStatistics();
   };
 
   // Render different pages based on currentPage state
@@ -118,7 +335,7 @@ function Dashboard() {
     return (
       <CourseViewer 
         course={selectedCourse}
-        onBack={handleBackToDashboard}
+        onBack={handleBackToCourses}
       />
     );
   }
@@ -135,6 +352,24 @@ function Dashboard() {
     return (
       <LearningProgress 
         onBack={handleBackToDashboard}
+      />
+    );
+  }
+
+  if (currentPage === 'quiz') {
+    return (
+      <QuizPage 
+        onBack={handleBackToDashboard}
+        onSelectQuiz={handleSelectCourse}
+      />
+    );
+  }
+
+  if (currentPage === 'videos') {
+    return (
+      <VideoPage 
+        onBack={handleBackToDashboard}
+        onSelectVideo={handleSelectCourse}
       />
     );
   }
@@ -236,7 +471,7 @@ function Dashboard() {
               <CardContent className="flex items-center justify-between p-6">
                 <div className="space-y-2">
                   <p className="text-blue-300 text-sm font-medium">Courses Enrolled</p>
-                  <p className="text-3xl font-bold">0</p>
+                  <p className="text-3xl font-bold">{statistics.coursesEnrolled}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3">
                   <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -250,7 +485,7 @@ function Dashboard() {
               <CardContent className="flex items-center justify-between p-6">
                 <div className="space-y-2">
                   <p className="text-green-300 text-sm font-medium">Completed</p>
-                  <p className="text-3xl font-bold">0</p>
+                  <p className="text-3xl font-bold">{statistics.coursesCompleted}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3">
                   <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,7 +499,7 @@ function Dashboard() {
               <CardContent className="flex items-center justify-between p-6">
                 <div className="space-y-2">
                   <p className="text-purple-300 text-sm font-medium">Study Hours</p>
-                  <p className="text-3xl font-bold">0h</p>
+                  <p className="text-3xl font-bold">{statistics.studyHours}h</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3">
                   <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -278,7 +513,7 @@ function Dashboard() {
               <CardContent className="flex items-center justify-between p-6">
                 <div className="space-y-2">
                   <p className="text-orange-300 text-sm font-medium">Achievements</p>
-                  <p className="text-3xl font-bold">0</p>
+                  <p className="text-3xl font-bold">{statistics.achievements}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3">
                   <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -315,13 +550,19 @@ function Dashboard() {
                         <div className="text-sm font-semibold">Browse Courses</div>
                       </div>
                     </Button>
-                    <Button className="h-24 bg-gradient-to-br from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <Button 
+                      onClick={handleTakeQuiz}
+                      className="h-24 bg-gradient-to-br from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
                       <div className="text-center space-y-2">
                         <div className="text-3xl group-hover:scale-110 transition-transform duration-300">📝</div>
                         <div className="text-sm font-semibold">Take a Quiz</div>
                       </div>
                     </Button>
-                    <Button className="h-24 bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <Button 
+                      onClick={handleWatchVideos}
+                      className="h-24 bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
                       <div className="text-center space-y-2">
                         <div className="text-3xl group-hover:scale-110 transition-transform duration-300">🎥</div>
                         <div className="text-sm font-semibold">Watch Videos</div>
@@ -358,14 +599,51 @@ function Dashboard() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4 opacity-50">🎯</div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-300">Ready to start learning?</h3>
-                    <p className="text-gray-400 mb-6 max-w-md mx-auto">Your learning activities will appear here as you progress through courses and complete quizzes.</p>
-                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                      Get Started
-                    </Button>
-                  </div>
+                  {statistics.recentActivities.length > 0 ? (
+                    <div className="space-y-3">
+                      {statistics.recentActivities.slice(0, 6).map((activity, index) => (
+                        <div key={activity.id || index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                          <div className="flex items-center space-x-3">
+                            <div className="text-lg">
+                              {activity.action === 'course_view' && '📚'}
+                              {activity.action === 'quiz_start' && '📝'}
+                              {activity.action === 'quiz_complete' && '✅'}
+                              {activity.action === 'video_play' && '▶️'}
+                              {activity.action === 'navigation' && '🧭'}
+                              {activity.action === 'button_click' && '👆'}
+                              {!['course_view', 'quiz_start', 'quiz_complete', 'video_play', 'navigation', 'button_click'].includes(activity.action) && '🎯'}
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-gray-300">
+                                {activity.action === 'course_view' && `Viewed course: ${activity.details?.courseTitle || 'Unknown'}`}
+                                {activity.action === 'quiz_start' && `Started quiz: ${activity.details?.courseTitle || 'Unknown'}`}
+                                {activity.action === 'quiz_complete' && `Completed quiz: ${activity.details?.courseTitle || 'Unknown'}`}
+                                {activity.action === 'video_play' && `Watched video: ${activity.details?.courseTitle || 'Unknown'}`}
+                                {activity.action === 'navigation' && `Navigated to ${activity.details?.to || 'page'}`}
+                                {activity.action === 'button_click' && `Clicked: ${activity.details?.buttonId || 'button'}`}
+                                {!['course_view', 'quiz_start', 'quiz_complete', 'video_play', 'navigation', 'button_click'].includes(activity.action) && `Action: ${activity.action}`}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {new Date(activity.timestamp).toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="text-6xl mb-4 opacity-50">🎯</div>
+                      <h3 className="text-xl font-semibold mb-3 text-gray-300">Ready to start learning?</h3>
+                      <p className="text-gray-400 mb-6 max-w-md mx-auto">Your learning activities will appear here as you progress through courses and complete quizzes.</p>
+                      <Button 
+                        onClick={handleBrowseCourses}
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                      >
+                        Get Started
+                      </Button>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -387,10 +665,13 @@ function Dashboard() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-semibold">Overall Progress</span>
-                      <span className="text-sm text-gray-400">0%</span>
+                      <span className="text-sm text-gray-400">{statistics.overallProgress}%</span>
                     </div>
                     <div className="w-full bg-gray-200/20 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style={{width: '0%'}}></div>
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-500" 
+                        style={{width: `${statistics.overallProgress}%`}}
+                      ></div>
                     </div>
                     
                     <Separator className="bg-white/10" />
@@ -398,94 +679,51 @@ function Dashboard() {
                     <div className="space-y-4">
                       <div className="flex justify-between items-center p-3 bg-blue-500/10 rounded-lg">
                         <span className="text-sm font-medium">This Week</span>
-                        <span className="text-sm text-blue-300 font-semibold">0 hours</span>
+                        <span className="text-sm text-blue-300 font-semibold">{statistics.weeklyHours} hours</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-green-500/10 rounded-lg">
                         <span className="text-sm font-medium">Streak</span>
-                        <span className="text-sm text-green-300 font-semibold">0 days</span>
+                        <span className="text-sm text-green-300 font-semibold">{statistics.streak} days</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-purple-500/10 rounded-lg">
                         <span className="text-sm font-medium">Rank</span>
-                        <Badge variant="secondary" className="bg-purple-500/20 text-purple-300">Beginner</Badge>
+                        <Badge variant="secondary" className="bg-purple-500/20 text-purple-300">{statistics.rank}</Badge>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* System Status */}
+              {/* Learning Tips */}
               <Card className="shadow-xl border-0 bg-white/5 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-3 text-xl">
-                    <span className="text-2xl">⚙️</span>
-                    <span>System Status</span>
+                    <span className="text-2xl">💡</span>
+                    <span>Learning Tips</span>
                   </CardTitle>
                   <CardDescription className="text-gray-400">
-                    Real-time system health and development information
+                    Boost your learning efficiency with these tips
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-3 bg-green-500/10 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-sm font-medium">API Status</span>
-                      </div>
-                      <Badge variant="secondary" className="bg-green-500/20 text-green-300">Online</Badge>
+                    <div className="p-3 bg-blue-500/10 rounded-lg">
+                      <p className="text-sm text-blue-300 font-medium mb-1">📚 Consistent Practice</p>
+                      <p className="text-xs text-gray-400">Study for 30 minutes daily for better retention</p>
                     </div>
                     
-                    <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                        <span className="text-sm font-medium">Database</span>
-                      </div>
-                      <Badge variant="outline" className="bg-blue-500/20 text-blue-300">Local JSON</Badge>
+                    <div className="p-3 bg-green-500/10 rounded-lg">
+                      <p className="text-sm text-green-300 font-medium mb-1">🎯 Set Goals</p>
+                      <p className="text-xs text-gray-400">Complete one course module per week</p>
                     </div>
                     
-                    <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
-                        <span className="text-sm font-medium">Analytics</span>
-                      </div>
-                      <Badge variant="secondary" className="bg-purple-500/20 text-purple-300">Active</Badge>
+                    <div className="p-3 bg-purple-500/10 rounded-lg">
+                      <p className="text-sm text-purple-300 font-medium mb-1">📝 Take Notes</p>
+                      <p className="text-xs text-gray-400">Write down key concepts while watching videos</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Development Info */}
-              {process.env.NODE_ENV === 'development' && (
-                <Card className="bg-yellow-500/10 border-yellow-200/20 shadow-xl">
-                  <CardHeader>
-                    <CardTitle className="text-lg text-yellow-300 flex items-center space-x-2">
-                      <span className="text-xl">🛠️</span>
-                      <span>Development Mode</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-2 bg-yellow-100/5 rounded-md">
-                        <span className="text-xs font-medium text-yellow-300">User ID</span>
-                        <span className="text-xs text-yellow-400">{user?.id}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-2 bg-yellow-100/5 rounded-md">
-                        <span className="text-xs font-medium text-yellow-300">Email</span>
-                        <span className="text-xs text-yellow-400">{user?.email}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-2 bg-yellow-100/5 rounded-md">
-                        <span className="text-xs font-medium text-yellow-300">Role</span>
-                        <span className="text-xs text-yellow-400">{user?.role}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-2 bg-yellow-100/5 rounded-md">
-                        <span className="text-xs font-medium text-yellow-300">Last Login</span>
-                        <span className="text-xs text-yellow-400">
-                          {user?.lastLogin ? new Date(user.lastLogin).toLocaleDateString() : 'First login'}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
             </div>
           </div>
         </div>
