@@ -137,7 +137,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
+                <FormLabel className="text-sm font-medium text-gray-400">
                   Email Address
                 </FormLabel>
                 <FormControl>
@@ -153,7 +153,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
                       disabled={isLoading}
                       {...field}
                       onChange={handleInputChange(field)}
-                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                     />
                   </div>
                 </FormControl>
@@ -168,7 +168,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
+                <FormLabel className="text-sm font-medium text-gray-400">
                   Password
                 </FormLabel>
                 <FormControl>
@@ -184,7 +184,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
                       disabled={isLoading}
                       {...field}
                       onChange={handleInputChange(field)}
-                      className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                     />
                     <button
                       type="button"
@@ -214,7 +214,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
           <div className="flex justify-end">
             <button
               type="button"
-              className="text-sm text-blue-600 hover:text-blue-700 hover:underline transition-colors duration-200"
+              className="text-sm text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-200"
               disabled={isLoading}
             >
               Forgot your password?
@@ -224,7 +224,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
           {/* Submit Button */}
           <Button 
             type="submit" 
-            className="w-full h-11 text-base font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="w-full h-11 text-base font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl text-white"
             disabled={isLoading || !form.formState.isValid}
           >
             {isLoading ? (

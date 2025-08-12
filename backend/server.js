@@ -55,7 +55,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Routes (will be added in next steps)
-// app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/content', require('./routes/content'));
 // app.use('/api/clickstream', require('./routes/clickstream'));
 

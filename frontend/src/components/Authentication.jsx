@@ -64,7 +64,9 @@ export function Authentication({ onAuthSuccess }) {
   const isLoginMode = authMode === AUTH_MODES.LOGIN;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      <div className="absolute top-0 z-[-2] h-screen w-screen bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
       <div className="w-full max-w-md space-y-8">
         {/* Header Section */}
         <div className="text-center space-y-6">
@@ -80,19 +82,19 @@ export function Authentication({ onAuthSuccess }) {
 
           {/* Title and Description */}
           <div className="space-y-3">
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-4xl font-bold text-white tracking-tight">
               EduTrack Pro
             </h1>
-            <p className="text-lg text-gray-600 font-medium">
+            <p className="text-lg text-gray-400 font-medium">
               Interactive Learning Platform
             </p>
             
             {/* Feature Badges */}
             <div className="flex justify-center gap-2 flex-wrap">
-              <Badge variant="secondary" className="text-xs px-3 py-1">
+              <Badge variant="secondary" className="text-xs px-3 py-1 bg-blue-500 text-white">
                 📊 Clickstream Analytics
               </Badge>
-              <Badge variant="outline" className="text-xs px-3 py-1">
+              <Badge variant="outline" className="text-xs px-3 py-1 bg-purple-500 text-white">
                 🎯 Personalized Learning
               </Badge>
             </div>
@@ -100,16 +102,16 @@ export function Authentication({ onAuthSuccess }) {
         </div>
 
         {/* Main Authentication Card */}
-        <Card className="shadow-xl border-0 bg-white/95 backdrop-blur-sm">
+        <Card className="shadow-xl border-0 bg-white/5 backdrop-blur-sm">
           <CardHeader className="space-y-4 pb-6">
             {/* Mode Switcher */}
             <div className="flex justify-center">
-              <div className="inline-flex rounded-lg bg-gray-100 p-1 shadow-inner">
+              <div className="inline-flex rounded-lg bg-gray-100/5 p-1 shadow-inner">
                 <Button
                   variant={isLoginMode ? "default" : "ghost"}
                   size="sm"
                   onClick={switchToLogin}
-                  className="rounded-md px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                  className="rounded-md px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-white/10 data-[state=active]:shadow-sm text-white"
                 >
                   Sign In
                 </Button>
@@ -117,7 +119,7 @@ export function Authentication({ onAuthSuccess }) {
                   variant={!isLoginMode ? "default" : "ghost"}
                   size="sm"
                   onClick={switchToRegister}
-                  className="rounded-md px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                  className="rounded-md px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-white/10 data-[state=active]:shadow-sm text-white"
                 >
                   Create Account
                 </Button>
@@ -126,10 +128,10 @@ export function Authentication({ onAuthSuccess }) {
 
             {/* Dynamic Content */}
             <div className="text-center space-y-2">
-              <CardTitle className="text-2xl font-semibold text-gray-900">
+              <CardTitle className="text-2xl font-semibold text-white">
                 {isLoginMode ? "Welcome back!" : "Get started today"}
               </CardTitle>
-              <CardDescription className="text-base text-gray-600">
+              <CardDescription className="text-base text-gray-400">
                 {isLoginMode 
                   ? "Sign in to continue your learning journey" 
                   : "Create your account and unlock personalized learning"
@@ -152,15 +154,15 @@ export function Authentication({ onAuthSuccess }) {
               />
             )}
             
-            <Separator className="my-6" />
+            <Separator className="my-6 bg-white/10" />
             
             {/* Features Preview */}
             <div className="space-y-4">
-              <p className="text-sm font-semibold text-center text-gray-700">
+              <p className="text-sm font-semibold text-center text-gray-400">
                 What you'll get:
               </p>
               <div className="grid grid-cols-1 gap-3">
-                <div className="flex items-center space-x-3 text-sm text-gray-600 bg-green-50 rounded-lg p-3">
+                <div className="flex items-center space-x-3 text-sm text-gray-400 bg-green-500/10 rounded-lg p-3">
                   <div className="bg-green-500 text-white rounded-full p-1 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -168,7 +170,7 @@ export function Authentication({ onAuthSuccess }) {
                   </div>
                   <span className="font-medium">Interactive content with videos, quizzes & text</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600 bg-blue-50 rounded-lg p-3">
+                <div className="flex items-center space-x-3 text-sm text-gray-400 bg-blue-500/10 rounded-lg p-3">
                   <div className="bg-blue-500 text-white rounded-full p-1 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -176,7 +178,7 @@ export function Authentication({ onAuthSuccess }) {
                   </div>
                   <span className="font-medium">Real-time progress tracking & analytics</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600 bg-purple-50 rounded-lg p-3">
+                <div className="flex items-center space-x-3 text-sm text-gray-400 bg-purple-500/10 rounded-lg p-3">
                   <div className="bg-purple-500 text-white rounded-full p-1 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -200,13 +202,13 @@ export function Authentication({ onAuthSuccess }) {
           
           {/* Development Info */}
           {process.env.NODE_ENV === 'development' && (
-            <Card className="bg-amber-50 border-amber-200">
+            <Card className="bg-amber-500/10 border-amber-200/20">
               <CardContent className="pt-4">
-                <div className="text-xs text-amber-700 space-y-2">
+                <div className="text-xs text-amber-400 space-y-2">
                   <p className="font-semibold flex items-center justify-center gap-1">
                     🛠️ Development Mode
                   </p>
-                  <div className="grid grid-cols-2 gap-2 text-left bg-amber-100 rounded p-2">
+                  <div className="grid grid-cols-2 gap-2 text-left bg-amber-100/5 rounded p-2">
                     <div className="font-medium">Mode:</div>
                     <div>{authMode}</div>
                     <div className="font-medium">API:</div>

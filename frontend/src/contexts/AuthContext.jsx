@@ -234,8 +234,12 @@ export function AuthProvider({ children }) {
         body: JSON.stringify({ email, password })
       });
 
-      if (response.success) {
-        const { user, token } = response;
+      if (response.token) {
+        const { token } = response;
+        // The user object is the response itself, minus the token
+        const user = { ...response };
+        delete user.token;
+        
         storeAuthData(user, token);
         dispatch({ 
           type: AUTH_ACTIONS.LOGIN_SUCCESS, 
@@ -269,8 +273,12 @@ export function AuthProvider({ children }) {
         body: JSON.stringify(userData)
       });
 
-      if (response.success) {
-        const { user, token } = response;
+      if (response.token) {
+        const { token } = response;
+        // The user object is the response itself, minus the token
+        const user = { ...response };
+        delete user.token;
+
         storeAuthData(user, token);
         dispatch({ 
           type: AUTH_ACTIONS.REGISTER_SUCCESS, 

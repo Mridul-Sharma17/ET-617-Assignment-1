@@ -197,7 +197,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Username</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-400">Username</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -211,7 +211,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
                       disabled={isLoading}
                       {...field}
                       onChange={handleInputChange(field)}
-                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                     />
                   </div>
                 </FormControl>
@@ -226,7 +226,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Email Address</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-400">Email Address</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -240,7 +240,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
                       disabled={isLoading}
                       {...field}
                       onChange={handleInputChange(field)}
-                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                     />
                   </div>
                 </FormControl>
@@ -255,7 +255,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Password</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-400">Password</FormLabel>
                 <FormControl>
                   <div className="space-y-2">
                     <div className="relative">
@@ -270,7 +270,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
                         disabled={isLoading}
                         {...field}
                         onChange={handleInputChange(field)}
-                        className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                       />
                       <button
                         type="button"
@@ -295,7 +295,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
                     {currentPassword && (
                       <div className="space-y-1">
                         <div className="flex items-center space-x-2">
-                          <div className="flex-1 bg-gray-200 rounded-full h-2">
+                          <div className="flex-1 bg-gray-200/20 rounded-full h-2">
                             <div 
                               className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.color}`}
                               style={{ width: `${(passwordStrength.strength / 5) * 100}%` }}
@@ -320,7 +320,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Confirm Password</FormLabel>
+                <FormLabel className="text-sm font-medium text-gray-400">Confirm Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -334,7 +334,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
                       disabled={isLoading}
                       {...field}
                       onChange={handleInputChange(field)}
-                      className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 pr-12 h-11 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/5 border-white/10 text-white"
                     />
                     <button
                       type="button"
@@ -363,7 +363,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
           {/* Submit Button */}
           <Button 
             type="submit" 
-            className="w-full h-11 text-base font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="w-full h-11 text-base font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl text-white"
             disabled={isLoading || !form.formState.isValid}
           >
             {isLoading ? (
