@@ -34,7 +34,7 @@ export function AnalyticsDashboard({ onBack }) {
       setLoading(true);
       analyticsLogger.info('Fetching clickstream analytics data');
       
-      const response = await fetch('http://localhost:5000/api/analytics/clickstream');
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'}/analytics/clickstream`);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);

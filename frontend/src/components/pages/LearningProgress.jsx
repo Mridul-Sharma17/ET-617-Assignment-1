@@ -37,7 +37,7 @@ export function LearningProgress({ onBack }) {
       progressLogger.info('Fetching learning progress data', { userId: user?.username });
       
       // Fetch clickstream data for this user
-      const response = await fetch(`http://localhost:5000/api/analytics/clickstream?userId=${user?.username || user?.id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'}/analytics/clickstream?userId=${user?.username || user?.id}`);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);

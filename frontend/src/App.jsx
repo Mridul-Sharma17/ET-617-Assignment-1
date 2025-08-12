@@ -84,11 +84,11 @@ function Dashboard() {
       const userId = user?.username || user?.id;
       appLogger.info('Loading user statistics', { 
         userId: userId,
-        endpoint: `http://localhost:5000/api/clickstream/user/${userId}` 
+        endpoint: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'}/clickstream/user/${userId}` 
       });
       
       // Fetch user's clickstream data to calculate statistics
-      const response = await fetch(`http://localhost:5000/api/clickstream/user/${userId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'}/clickstream/user/${userId}`);
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
