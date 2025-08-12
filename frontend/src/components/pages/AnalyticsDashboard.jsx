@@ -54,6 +54,55 @@ export function AnalyticsDashboard({ onBack }) {
     }
   };
 
+  // Export functions
+  const exportToCSV = () => {
+    if (!analyticsData?.data) return;
+    
+    const csvContent = [
+      ['Event ID', 'User ID', 'Session ID', 'Event Type', 'Timestamp', 'Course ID', 'Additional Data'],
+      ...analyticsData.data.map(event => [
+        event.id,
+        event.userId,
+        event.sessionId,
+        event.eventType || event.action || 'unknown',
+        event.timestamp,
+        event.eventData?.courseId || '',
+        JSON.stringify(event.eventData || {})
+      ])
+    ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `learning_analytics_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    
+    analyticsLogger.success('Data exported to CSV');
+  };
+
+  const exportToJSON = () => {
+    if (!analyticsData?.data) return;
+    
+    const jsonData = {
+      exportDate: new Date().toISOString(),
+      totalEvents: analyticsData.data.length,
+      analytics: analytics,
+      rawData: analyticsData.data
+    };
+    
+    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `learning_analytics_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    
+    analyticsLogger.success('Data exported to JSON');
+  };
+
   useEffect(() => {
     fetchAnalytics();
   }, []);
@@ -187,12 +236,26 @@ export function AnalyticsDashboard({ onBack }) {
               <p className="text-gray-400">Insights from clickstream data</p>
             </div>
           </div>
-          <Button onClick={fetchAnalytics} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={fetchAnalytics} className="bg-blue-600 hover:bg-blue-700 mr-4">
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
             Refresh Data
           </Button>
+          <div className="flex space-x-2">
+            <Button onClick={exportToCSV} variant="outline" className="bg-green-600 hover:bg-green-700 text-white border-green-600">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export CSV
+            </Button>
+            <Button onClick={exportToJSON} variant="outline" className="bg-purple-600 hover:bg-purple-700 text-white border-purple-600">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export JSON
+            </Button>
+          </div>
         </div>
 
         {/* Overview Cards */}

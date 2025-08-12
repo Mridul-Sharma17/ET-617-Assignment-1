@@ -97,6 +97,13 @@ function Dashboard() {
     setCurrentPage('analytics');
   };
 
+  const handleViewProgress = () => {
+    appLogger.info('Navigating to learning progress');
+    clickstreamService.trackNavigation('dashboard', 'progress');
+    clickstreamService.trackButtonClick('view_progress', { from: 'dashboard' });
+    setCurrentPage('progress');
+  };
+
   // Render different pages based on currentPage state
   if (currentPage === 'courses') {
     return (
@@ -119,6 +126,14 @@ function Dashboard() {
   if (currentPage === 'analytics') {
     return (
       <AnalyticsDashboard 
+        onBack={handleBackToDashboard}
+      />
+    );
+  }
+
+  if (currentPage === 'progress') {
+    return (
+      <LearningProgress 
         onBack={handleBackToDashboard}
       />
     );
@@ -319,6 +334,15 @@ function Dashboard() {
                       <div className="text-center space-y-2">
                         <div className="text-3xl group-hover:scale-110 transition-transform duration-300">📊</div>
                         <div className="text-sm font-semibold">View Analytics</div>
+                      </div>
+                    </Button>
+                    <Button 
+                      onClick={handleViewProgress}
+                      className="h-24 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
+                      <div className="text-center space-y-2">
+                        <div className="text-3xl group-hover:scale-110 transition-transform duration-300">🏆</div>
+                        <div className="text-sm font-semibold">Learning Progress</div>
                       </div>
                     </Button>
                   </div>
